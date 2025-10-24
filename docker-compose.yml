@@ -7,6 +7,12 @@ services:
     volumes:
       - ./config/cantaloupe.properties:/home/cantaloupe/cantaloupe.properties
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8182"]
+      interval: 60s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
     environment:
       # Java Opts
       JAVA_OPTS: >
