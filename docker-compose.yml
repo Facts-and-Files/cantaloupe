@@ -1,0 +1,26 @@
+services:
+  cantaloupe:
+    image: uclalibrary/cantaloupe:5.0.7-0
+    container_name: cantaloupe_server
+    ports:
+      - "8182:8182"
+    volumes:
+      - ./config/cantaloupe.properties:/home/cantaloupe/cantaloupe.properties
+    restart: unless-stopped
+    environment:
+      # Java Opts
+      JAVA_OPTS: >
+        -Xms512m
+        -Xmx2g
+        -Dcantaloupe.config=/home/cantaloupe/cantaloupe.properties
+        -Daws.accessKeyId=${AWS_ACCESS_KEY_ID}
+        -Daws.secretAccessKey=${AWS_SECRET_ACCESS_KEY}
+        -Daws.region=${AWS_REGION}
+
+      # Need Admin UI for development?
+      ENDPOINT_ADMIN_ENABLED: "${ENDPOINT_ADMIN_ENABLED}"
+      ENDPOINT_ADMIN_USERNAME: "${ENDPOINT_ADMIN_USERNAME}"
+      ENDPOINT_ADMIN_SECRET: "${ENDPOINT_ADMIN_SECRET}"
+
+      # Set to debug on development
+      LOG_APPLICATION_LEVEL: "${LOG_APPLICATION_LEVEL}"
