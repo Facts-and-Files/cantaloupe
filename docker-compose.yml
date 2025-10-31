@@ -13,6 +13,8 @@ services:
       timeout: 5s
       retries: 3
       start_period: 10s
+    networks:
+      - kali-net
     environment:
       # Java Opts
       JAVA_OPTS: >
@@ -30,3 +32,13 @@ services:
 
       # Set to debug on development
       LOG_APPLICATION_LEVEL: "${LOG_APPLICATION_LEVEL}"
+
+      # Create Nginx vHost and SSL cert from ACME companion
+      VIRTUAL_HOST: "${VIRTUAL_HOST}"
+      LETSENCRYPT_HOST: "${LETSENCRYPT_HOST}"
+      LETSENCRYPT_EMAIL: "${LETSENCRYPT_EMAIL}"
+      VIRTUAL_PORT: 8182
+
+networks:
+  kali-net:
+    external: true
