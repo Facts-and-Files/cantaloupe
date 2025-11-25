@@ -8,13 +8,13 @@ services:
       - ./config/cantaloupe.properties:/home/cantaloupe/cantaloupe.properties
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8182"]
+      test: ["CMD", "curl", "-f", "http://localhost:8182/health"]
       interval: 60s
       timeout: 5s
       retries: 3
       start_period: 10s
     networks:
-      - kali-net
+      - tp-net
     environment:
       # Java Opts
       JAVA_OPTS: >
@@ -24,6 +24,9 @@ services:
         -Daws.accessKeyId=${AWS_ACCESS_KEY_ID}
         -Daws.secretAccessKey=${AWS_SECRET_ACCESS_KEY}
         -Daws.region=${AWS_REGION}
+
+      # S3 source endpoints
+      S3SOURCE_ENDPOINT: ${AWS_ENDPOINT}
 
       # Need Admin UI for development?
       ENDPOINT_ADMIN_ENABLED: "${ENDPOINT_ADMIN_ENABLED}"
@@ -40,5 +43,6 @@ services:
       VIRTUAL_PORT: 8182
 
 networks:
-  kali-net:
+  tp-net:
     external: true
+    name: ${DOCKER_NETWORK}
