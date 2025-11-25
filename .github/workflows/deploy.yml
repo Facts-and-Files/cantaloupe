@@ -37,6 +37,7 @@ jobs:
             AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}
             AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}
             AWS_REGION=${{ secrets.AWS_REGION }}
+            AWS_ENDPOINT=${{ secrets.AWS_ENDPOINT }}
             ENDPOINT_ADMIN_ENABLED=false
             ENDPOINT_ADMIN_USERNAME=none
             ENDPOINT_ADMIN_SECRET=none
@@ -44,6 +45,7 @@ jobs:
             VIRTUAL_HOST=${{ secrets.VIRTUAL_HOST }}
             LETSENCRYPT_HOST=${{ secrets.LETSENCRYPT_HOST }}
             LETSENCRYPT_EMAIL=${{ secrets.LETSENCRYPT_EMAIL }}
+            DOCKER_NETWORK={{ secrets.DOCKER_NETWORK }}
             EOF
 
             echo "Environment file written to $TARGET_DIR/.env"
