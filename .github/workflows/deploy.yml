@@ -45,7 +45,7 @@ jobs:
             VIRTUAL_HOST=${{ secrets.VIRTUAL_HOST }}
             LETSENCRYPT_HOST=${{ secrets.LETSENCRYPT_HOST }}
             LETSENCRYPT_EMAIL=${{ secrets.LETSENCRYPT_EMAIL }}
-            DOCKER_NETWORK={{ secrets.DOCKER_NETWORK }}
+            DOCKER_NETWORK=${{ secrets.DOCKER_NETWORK }}
             EOF
 
             echo "Environment file written to $TARGET_DIR/.env"
